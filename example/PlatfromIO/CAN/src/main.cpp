@@ -37,7 +37,7 @@ void setup()
 
   SD_test();
   Serial.println("Basic Demo - ESP32-Arduino-CAN");
-  CAN_cfg.speed = CAN_SPEED_1000KBPS;
+  CAN_cfg.speed = CAN_SPEED_500KBPS;
   CAN_cfg.tx_pin_id = GPIO_NUM_27;
   CAN_cfg.rx_pin_id = GPIO_NUM_26;
   CAN_cfg.rx_queue = xQueueCreate(rx_queue_size, sizeof(CAN_frame_t));
@@ -90,13 +90,13 @@ void loop()
     previousMillis = currentMillis;
     CAN_frame_t tx_frame;
     tx_frame.FIR.B.FF = CAN_frame_std;
-    tx_frame.MsgID = 0x001;
+    tx_frame.MsgID = 0x042;
     tx_frame.FIR.B.DLC = 8;
-    tx_frame.data.u8[0] = 0x00;
+    tx_frame.data.u8[0] = 0x01;
     tx_frame.data.u8[1] = 0x01;
-    tx_frame.data.u8[2] = 0x02;
+    tx_frame.data.u8[2] = 0x03;
     tx_frame.data.u8[3] = 0x03;
-    tx_frame.data.u8[4] = 0x04;
+    tx_frame.data.u8[4] = 0xFF;
     tx_frame.data.u8[5] = 0x05;
     tx_frame.data.u8[6] = 0x06;
     tx_frame.data.u8[7] = 0x07;
